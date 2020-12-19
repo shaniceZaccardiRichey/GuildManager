@@ -25,6 +25,7 @@ namespace GuildManager.Controllers
         [Authorize]
         public IActionResult MyCharacters()
         {
+            // Gets user ID for session, then calls method to get all characters belonging to that ID.
             string userID = _userManager.GetUserId(HttpContext.User);
 
             Character character = new Character();
@@ -33,18 +34,17 @@ namespace GuildManager.Controllers
 
             return View(characters);
         }
-
-        [Authorize]
+      
         public IActionResult Add()
         {
+            // Basic GET to get form.
             return View();
         }
-
-        [Authorize]
+        
         [HttpPost]
         public IActionResult Add(Character character)
         {
-            // Get user id
+            // Validates, gets user ID to complete character model, then calls method to save character.
             character.GuildmemberID = _userManager.GetUserId(HttpContext.User);
 
             if (ModelState.IsValid)
@@ -62,6 +62,7 @@ namespace GuildManager.Controllers
 
         public IActionResult Edit(int characterID)
         {
+            // Populates Edit view with character info.
             Character character = new Character();
 
             character = character.GetCharacterByID(context, characterID);
@@ -72,6 +73,7 @@ namespace GuildManager.Controllers
         [HttpPost]
         public IActionResult Edit(Character character)
         {
+            // Validates, then calls method to update character.
             string userID = _userManager.GetUserId(HttpContext.User);
 
             if (ModelState.IsValid)
@@ -89,6 +91,7 @@ namespace GuildManager.Controllers
 
         public IActionResult Delete(int characterID)
         {
+            // Calls methos to retrieve user for verification view.
             Character character = new Character();
 
             character = character.GetCharacterByID(context, characterID);
@@ -99,6 +102,7 @@ namespace GuildManager.Controllers
         [HttpPost]
         public IActionResult Delete(Character character, string delete, string cancel)
         {
+            // Calls method to delete after delete is confirmed by user.
             if (!string.IsNullOrEmpty(delete))
             {
                 character.DeleteCharacter(context, character);

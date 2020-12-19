@@ -22,6 +22,7 @@ namespace GuildManager.Data
         {
             base.OnModelCreating(builder);
             
+            // Seed data for announcement page.
             builder.Entity<Announcement>().HasData(
                 
                 new Announcement

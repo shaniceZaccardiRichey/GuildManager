@@ -23,18 +23,22 @@ namespace GuildManager.Models
 
         // Status
         [Required(ErrorMessage = "Please designate as Main or Alt.")]
+        [EnumDataType(typeof(CharacterStatus))]
         public CharacterStatus? Status { get; set; }
 
         // Class
         [Required(ErrorMessage = "Please select a class.")]
+        [EnumDataType(typeof(ClassName))]
         public ClassName? Class { get; set; }
 
         // Specialization
         [Required(ErrorMessage = "Please select a specialization.")]
+        [EnumDataType(typeof(Spec))]
         public Spec? Specialization { get; set; }
 
         // Role
         [Required(ErrorMessage = "Please select a role.")]
+        [EnumDataType(typeof(Role))]
         public Role? Role { get; set; }
 
         // Item Level
@@ -51,6 +55,7 @@ namespace GuildManager.Models
 
         }
 
+        // Get all characters belonging to user.
         public List<Character> GetAllCharacters(ApplicationDbContext ctx, string userID)
         {
             List<Character> characters = ctx.Characters
@@ -60,6 +65,7 @@ namespace GuildManager.Models
             return characters;
         }
 
+        // Get character using CharacterID.
         public Character GetCharacterByID(ApplicationDbContext ctx, int id)
         {
             Character character = ctx.Characters
@@ -68,12 +74,14 @@ namespace GuildManager.Models
             return character;
         }
 
+        // Save character.
         public void SaveCharacter(ApplicationDbContext ctx, Character character)
         {
             ctx.Add(character);
             ctx.SaveChanges();
         }
 
+        // Update character.
         public void UpdateCharacter(ApplicationDbContext ctx, Character character, string userID)
         {
             character.GuildmemberID = userID;
@@ -82,6 +90,7 @@ namespace GuildManager.Models
             ctx.SaveChanges();
         }
 
+        // Delete character.
         public void DeleteCharacter(ApplicationDbContext ctx, Character character)
         {
             ctx.Remove(character);

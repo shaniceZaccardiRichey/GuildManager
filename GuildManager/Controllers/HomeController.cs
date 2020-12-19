@@ -28,6 +28,7 @@ namespace GuildManager.Controllers
         [Authorize]
         public IActionResult Index()
         {
+            // Lists announcements.
             List<Announcement> announcements = Announcement.GetAnnouncements(context);
 
             return View(announcements);
