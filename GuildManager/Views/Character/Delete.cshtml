@@ -1,0 +1,14 @@
+﻿@model Character
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete Character</h1>
+
+<h3>Are you sure you would like to delete @Model.Name?</h3>
+
+<form method="post">
+    <button type="submit" class="btn btn-primary" name="delete" value="Delete">Delete</button>
+    <button type="submit" class="btn btn-secondary" name="cancel" value="Cancel">Cancel</button>
+</form>

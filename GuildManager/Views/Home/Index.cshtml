@@ -1,0 +1,9 @@
+﻿@model List<Announcement>
+
+@foreach (Announcement a in Model)
+{
+    <h1>@a.Title</h1>
+    <p>@a.Content</p>
+    <p>@a.Date.</p>
+}
+
